@@ -1,0 +1,80 @@
+
+Руководство по установке форума PHPBB 3.2.1
+
+Необходимо установить Apache, PostgreSQL, PHP
+
+
+Устанавливаем Apache 2.2
+Для текущей директории прописываем в файле конфигурации
+
+DocumentRoot "D:/http_server"
+<Directory "D:/http_server">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
+
+Устанавливаем PHP версии 5.4.0
+
+Под Windows нет msi инсталла поэтому надо распаковать архив в C:\PHP
+
+Настраиваем Apache для работы с PHP, для этого в config прописываем
+
+LoadModule php5_module "С:\PHP\php5apache2_2.dll"
+AddHandler application/x-httpd-php .php
+PHPIniDir "с:\PHP"
+
+В каталоге PHP так же должен присутствовать файл php5ts.dll
+
+Провисываем в файл phptest.php
+
+<?php phpinfo(); ?>
+
+Открываем из браузера и убеждаемся что PHP работает.
+
+Устанавливаем PostGreSQL версия 8.3.3 (может и 9.5.3)
+
+После установки в файле C:\PHP\php.ini надо раскоментировать
+
+extension=D:\PHP\ext\php_pdo_pgsql.dll
+extension=D:\PHP\ext\php_pgsql.dll
+
+После запуска phpinfo.php в выдаче должны присутствовать секции
+pdo_pgsql
+pgsql
+
+Создаем базу данных PostGreSQL
+
+Подключаемся к базе как суперюзер через команду
+
+psql -U postgres
+
+Указываем пароль, если забыли то гуглим "Reset Passqord for PostGresQSL"
+
+
+Создаем базу данных
+CREATE DATABASE lusiadas;
+
+Создаем пользователя и даем ему управо на базу
+
+CREATE USER tester WITH PASSWORD 'test_password';
+GRANT ALL PRIVILEGES ON DATABASE "test_database" to tester;
+
+Посмотреть список баз можно командой \list
+
+Устанавливаем PHPBB 3.2.1
+
+дополнить
+
+После установки НЕ ОТКРЫВАТЬ ФОРУМ ЧЕРЕЗ БРАЙЗЕР
+сначала переименовать каталог install
+
+
+
+
+
+
+
+
+

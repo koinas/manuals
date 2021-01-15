@@ -1,0 +1,22 @@
+﻿
+Инструкция по сборке QT
+
+>>perl ./init-repository
+или
+>>perl ./init-repository -f
+
+>>configure -debug -nomake tests -nomake examples -confirm-license
+
+>>nmake
+
+собранные файлы будут в bin директориях
+
+size before nmake
+5370534163 bytes
+
+size after nmake
+16437906515
+
+>>nmake install
+
+библиотека будет установдена в C:\qt

@@ -1,0 +1,73 @@
+﻿Установка и работа с postgres
+
+1. Установка
+Версии 8.3.3 или 9.5.3
+
+Please provide a password for the database superuser(postgres) 
+Надо указать главный пароль под которым потом можно залогинится командой
+psql -U postgres
+password>> пароль
+
+2. Создание базы даных
+
+Подключаемся к базе как суперюзер через команду
+
+psql -U postgres
+
+Указываем пароль, если забыли то гуглим "Reset Passqord for PostGresQSL"
+
+Создаем базу данных
+CREATE DATABASE lusiadas;
+
+Создаем пользователя и даем ему управо на базу
+
+CREATE USER tester WITH PASSWORD 'test_password';
+GRANT ALL PRIVILEGES ON DATABASE "test_database" to tester;
+
+Посмотреть список баз можно командой \list
+
+3. Настройка с PHP и Апачем
+
+После установки в файле C:\PHP\php.ini надо раскоментировать
+
+extension=D:\PHP\ext\php_pdo_pgsql.dll
+extension=D:\PHP\ext\php_pgsql.dll
+
+В конфиге апача надо добавить такую строку перед LoadModule php5_module "C:\PHP\php5apache2_2.dll"
+
+LoadFile "C:/Program Files/PostgreSQL/9.5/bin/libpq.dll"
+
+После запуска phpinfo.php в выдаче должны присутствовать секции
+pdo_pgsql
+pgsql
+
+4. Подключение к базе данных
+
+После создания базы к ней можно подключиться
+postgres=# \c имя_базы
+Появится имя_базы=#
+
+Чтоб работать с базой к ней надо подключиться
+
+5. Создание таблицы
+
+CREATE TABLE movies_table (id int,filepath varchar(255),tags int);
+
+В ответ должно появиться: CREATE TABLE
+
+Комманда \dt покажет таблицы
+
+6. Добавление записей в таблицу
+
+INSERT INTO movies_table VALUES (1,'C:\m1',10);
+
+7. Получить записи
+
+SELECT * FROM movies_table;
+
+8. Проверить кодировку базы
+
+	SELECT current_setting('server_encoding');
+	
+Во сновном UTF-8
+
